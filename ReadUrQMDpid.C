@@ -36,12 +36,12 @@ for (Int_t i=0;i<nevent;i++)
 {
 	mychain.GetEvent(i);
   if(particle.numbercoll==0)continue;//protones participantes
-	myfile << x << "," << y << "," << z << "," << e << "," << p << "," << px << ","<< py << "," << pz << "," << m 
-	<< "," << ch << "," << pid << "," << pt << "," << eta << "\n"; 
+	myfile << Form("%.2f", x) << "," << Form("%.2f", y) << "," << Form("%.2f", z) << "," << Form("%.2f", e) << "," << Form("%.2f", p) << "," << Form("%.2f", px) << ","<< Form("%.2f", px) << "," << Form("%.2f", pz) << "," << m 
+	<< "," << Form("%.2f",ch) << "," << Form("%.2f", pid) << "," << Form("%.2f", pt) << "," << Form("%.2f", eta) << "\n"; 
     
 	p = particle.P;
 	e = particle.E;
-	x = particle.X;
+	x = round(particle.X);
 	y = particle.Y;
 	z = particle.Z;
 	px = particle.Px;
