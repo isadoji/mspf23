@@ -13,8 +13,13 @@ void urqmdtoroot()
     Float_t  time,X,Y,Z,E,Px,Py,Pz,m,id,isoespin,charge,lastcoll,numbercoll,history,frezetime,frezeX,frezeY,frezeZ,frezeE,frezePx,frezePy,frezePz;
     Int_t nlines = 0;
 
-    TFile hfile("output/pid.root","RECREATE","Demo ROOT file with histograms & trees");
+	Float_t x,y,z,e,px, py,pz,mass,ch,pid;
 
+    TFile hfile("output/pid.root","RECREATE","Demo ROOT file with histograms & trees");
+	
+	ofstream myfile;
+    myfile.open ("output/pid.csv");
+    myfile << "x,y,z,e,px,py,pz,mass,ch,pid\n";
 
     struct particula_t
     {
@@ -180,8 +185,15 @@ void urqmdtoroot()
 	    particle.frezePt = FPt;
 	    particle.frezeP= FP;
 	    particle.frezeEta= FEta;
+
+		myfile << X << "," << Y << "," << Z << "," << E << "," << Px << ","<< Py << "," << Pz << 
+	"," << m << "," << charge << "," << id << "\n"; 
+
+  
+
 	    nlines++;
 	    //event.nparticles = nlines
+
 	    tree->Fill();
 	    if(event.nparticles>0)
 	      {
@@ -209,6 +221,7 @@ void urqmdtoroot()
 
     hfile.Write();
     hfile.Close();
+	myfile.close();
 
 
 }
